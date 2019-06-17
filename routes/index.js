@@ -27,7 +27,6 @@ module.exports = function(server) {
 			if (err) {
 				console.error(err);
 				return next(new errors.InternalError(err.message));
-				next();
 			}
 
 			res.send(201);
@@ -125,7 +124,10 @@ module.exports = function(server) {
 				);
 			}
 
-			res.send(204);
+			res.send({
+				status: 204,
+				message: `deleted todo by id: ${req.params.todo_id}`
+			});
 			next();
 		});
 	});
